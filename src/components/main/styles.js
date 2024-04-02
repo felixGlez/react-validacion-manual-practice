@@ -10,6 +10,10 @@ const StyledMainContainer = styled.div`
 	align-items: center;
 	background: url(./images/bg-intro-desktop.png);
 	background-color: #ff7979;
+
+	@media (max-width: 769px) {
+		flex-direction: column;
+	}
 `;
 
 // INFO
@@ -19,6 +23,11 @@ const StyledInfoContainer = styled.div`
 	justify-content: center;
 	align-items: flex-start;
 	flex-direction: column;
+
+	@media (max-width: 769px) {
+		width: 90%;
+		text-align: center;
+	}
 `;
 
 const StyledTitle = styled.h1`
@@ -43,6 +52,10 @@ const StyledFormContainer = styled.div`
 	align-items: center;
 	flex-direction: column;
 	gap: 2rem;
+
+	@media (max-width: 769px) {
+		width: 90%;
+	}
 `;
 
 const StyledAd = styled.div`
@@ -74,14 +87,31 @@ const StyledForm = styled.form`
 	box-shadow: 0px 8px 0px 0px rgba(0, 0, 0, 0.1469);
 `;
 
-const StyledInput = styled.input`
+const StyledInputContainer = styled.div`
 	width: 90%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+`;
+
+const StyledInput = styled.input`
+	width: 100%;
 	font-family: 'Poppins', sans-serif;
 	font-weight: 600;
 	padding: 1rem 2rem;
 	color: #3d3b48;
 	border: 1px solid #dedede;
 	border-radius: 0.313rem;
+`;
+
+const StyledSpanError = styled.span`
+	font-family: 'Poppins', sans-serif;
+	font-size: 0.688rem;
+	font-style: italic;
+	font-weight: 400;
+	color: #ff7979;
+	text-align: right;
 `;
 
 const StyledButton = styled.button`
@@ -97,6 +127,11 @@ const StyledButton = styled.button`
 	background-color: #38cc8b;
 	box-shadow: inset 0px -4px 0px 0px rgba(0, 0, 0, 0.0909);
 	cursor: pointer;
+	transition: 0.3s;
+
+	&:hover {
+		background-color: #77e2b3;
+	}
 `;
 
 export {
@@ -109,5 +144,7 @@ export {
 	StyledAdSpan,
 	StyledForm,
 	StyledInput,
-	StyledButton
+	StyledButton,
+	StyledSpanError,
+	StyledInputContainer
 };
