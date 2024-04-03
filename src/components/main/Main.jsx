@@ -21,10 +21,22 @@ const Main = () => {
 		email: '',
 		password: '',
 		errors: {
-			name: false,
-			surnames: false,
-			email: false,
-			password: false
+			name: {
+				empty: false,
+				wrong: false
+			},
+			surnames: {
+				empty: false,
+				wrong: false
+			},
+			email: {
+				empty: false,
+				wrong: false
+			},
+			password: {
+				empty: false,
+				wrong: false
+			}
 		}
 	});
 	console.log(formValues);
@@ -53,8 +65,11 @@ const Main = () => {
 							name='name'
 							onChange={event => saveValues(event, formValues, setFormValues)}
 						/>
-						{formValues.errors.name && (
-							<StyledSpanError>El nombre no es correcto</StyledSpanError>
+						{formValues.errors.name.empty && (
+							<StyledSpanError>First Name cannot be empty</StyledSpanError>
+						)}
+						{formValues.errors.name.wrong && (
+							<StyledSpanError>Name format is wrong</StyledSpanError>
 						)}
 					</StyledInputContainer>
 					<StyledInputContainer>
@@ -65,8 +80,11 @@ const Main = () => {
 							name='surnames'
 							onChange={event => saveValues(event, formValues, setFormValues)}
 						/>
-						{formValues.errors.surnames && (
-							<StyledSpanError>El apellido no es correcto</StyledSpanError>
+						{formValues.errors.surnames.empty && (
+							<StyledSpanError>Last Name cannot be empty</StyledSpanError>
+						)}
+						{formValues.errors.surnames.wrong && (
+							<StyledSpanError>Last Name format is wrong</StyledSpanError>
 						)}
 					</StyledInputContainer>
 					<StyledInputContainer>
@@ -77,8 +95,11 @@ const Main = () => {
 							name='email'
 							onChange={event => saveValues(event, formValues, setFormValues)}
 						/>
-						{formValues.errors.email && (
-							<StyledSpanError>El email no es correcto</StyledSpanError>
+						{formValues.errors.email.empty && (
+							<StyledSpanError>Email cannot be empty</StyledSpanError>
+						)}
+						{formValues.errors.email.wrong && (
+							<StyledSpanError>Looks like this is not an email</StyledSpanError>
 						)}
 					</StyledInputContainer>
 					<StyledInputContainer>
@@ -89,10 +110,13 @@ const Main = () => {
 							name='password'
 							onChange={event => saveValues(event, formValues, setFormValues)}
 						/>
-						{formValues.errors.password && (
+						{formValues.errors.password.empty && (
+							<StyledSpanError>Password cannot be empty</StyledSpanError>
+						)}
+						{formValues.errors.password.wrong && (
 							<StyledSpanError>
-								La contraseña debe contener al menos 8 dígitos,<br></br>una
-								mayúscula, una minúscula, un dígito y un carácter especial
+								Password must contain at least 8 digits,<br></br>one uppercase,
+								one lowercase, one digit and a special character
 							</StyledSpanError>
 						)}
 					</StyledInputContainer>
@@ -114,28 +138,56 @@ const validateInput = (name, value, formValues, setFormValues) => {
 		const isValidName = !regexName.test(formatedValue);
 		setFormValues({
 			...formValues,
-			errors: { ...formValues.errors, name: isValidName }
+			errors: {
+				...formValues.errors,
+				name: {
+					...formValues.errors.name,
+					wrong: isValidName && formatedValue,
+					empty: !formatedValue
+				}
+			}
 		});
 	}
 	if (name === 'surnames') {
 		const isValidSurnames = !regexName.test(formatedValue);
 		setFormValues({
 			...formValues,
-			errors: { ...formValues.errors, surnames: isValidSurnames }
+			errors: {
+				...formValues.errors,
+				surnames: {
+					...formValues.errors.surnames,
+					wrong: isValidSurnames && formatedValue,
+					empty: !formatedValue
+				}
+			}
 		});
 	}
 	if (name === 'email') {
 		const isValidEmail = !regexEmail.test(formatedValue);
 		setFormValues({
 			...formValues,
-			errors: { ...formValues.errors, email: isValidEmail }
+			errors: {
+				...formValues.errors,
+				email: {
+					...formValues.errors.email,
+					wrong: isValidEmail && formatedValue,
+					empty: !formatedValue
+				}
+			}
 		});
 	}
 	if (name === 'password') {
 		const isValidPassword = !regexPassword.test(formatedValue);
 		setFormValues({
 			...formValues,
-			errors: { ...formValues.errors, password: isValidPassword }
+			errors: {
+				...formValues.errors,
+				password: {
+					...formValues.errors.password,
+					wrong: isValidPassword && formatedValue,
+					empty: !formatedValue
+				}
+			}
 		});
 	}
 };

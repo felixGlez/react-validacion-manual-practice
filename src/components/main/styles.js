@@ -13,6 +13,7 @@ const StyledMainContainer = styled.div`
 
 	@media (max-width: 769px) {
 		flex-direction: column;
+		justify-content: center;
 	}
 `;
 
@@ -27,6 +28,8 @@ const StyledInfoContainer = styled.div`
 	@media (max-width: 769px) {
 		width: 90%;
 		text-align: center;
+		justify-content: center;
+		align-items: center;
 	}
 `;
 
@@ -36,6 +39,12 @@ const StyledTitle = styled.h1`
 	line-height: 3.438rem;
 	font-weight: 700;
 	color: #ffffff;
+	@media (max-width: 769px) {
+		width: 90%;
+		text-align: center;
+		font-size: 2rem;
+		line-height: 2.2rem;
+	}
 `;
 
 const StyledText = styled(StyledTitle)`
