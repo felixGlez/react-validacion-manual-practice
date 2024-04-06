@@ -39,7 +39,7 @@ const Main = () => {
 			}
 		}
 	});
-	console.log(formValues);
+	// console.log(formValues);
 
 	return (
 		<StyledMainContainer>
@@ -63,6 +63,9 @@ const Main = () => {
 							type='text'
 							id='name'
 							name='name'
+							$isWrong={
+								formValues.errors.name.wrong || formValues.errors.name.empty
+							}
 							onChange={event => saveValues(event, formValues, setFormValues)}
 						/>
 						{formValues.errors.name.empty && (
@@ -78,6 +81,10 @@ const Main = () => {
 							type='text'
 							id='surnames'
 							name='surnames'
+							$isWrong={
+								formValues.errors.surnames.wrong ||
+								formValues.errors.surnames.empty
+							}
 							onChange={event => saveValues(event, formValues, setFormValues)}
 						/>
 						{formValues.errors.surnames.empty && (
@@ -93,6 +100,9 @@ const Main = () => {
 							type='email'
 							id='email'
 							name='email'
+							$isWrong={
+								formValues.errors.email.wrong || formValues.errors.email.empty
+							}
 							onChange={event => saveValues(event, formValues, setFormValues)}
 						/>
 						{formValues.errors.email.empty && (
@@ -108,6 +118,10 @@ const Main = () => {
 							type='password'
 							id='password'
 							name='password'
+							$isWrong={
+								formValues.errors.password.wrong ||
+								formValues.errors.password.empty
+							}
 							onChange={event => saveValues(event, formValues, setFormValues)}
 						/>
 						{formValues.errors.password.empty && (
@@ -120,7 +134,15 @@ const Main = () => {
 							</StyledSpanError>
 						)}
 					</StyledInputContainer>
-					<StyledButton>CLAIM YOUR FREE TRIAL</StyledButton>
+					<StyledButton
+						disabled={
+							!Object.values(formValues.errors).every(errorObj => {
+								return Object.values(errorObj).every(error => !error);
+							})
+						}
+					>
+						CLAIM YOUR FREE TRIAL
+					</StyledButton>
 				</StyledForm>
 			</StyledFormContainer>
 		</StyledMainContainer>

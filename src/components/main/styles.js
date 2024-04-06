@@ -110,8 +110,10 @@ const StyledInput = styled.input`
 	font-weight: 600;
 	padding: 1rem 2rem;
 	color: #3d3b48;
-	border: 1px solid #dedede;
 	border-radius: 0.313rem;
+	border: ${({ $isWrong }) =>
+		$isWrong ? '2px solid #FF7979' : '1px solid #dedede'};
+	outline: none;
 `;
 
 const StyledSpanError = styled.span`
